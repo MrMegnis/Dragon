@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget{
+	background-color: #2B2D42;
+}
+
+/*Buttons settings*/
+QPushButton {
+	color: #F9F5E3;
+	border: #414464;
+	border-radius: 5px;
+	background-color: #414464;
+	min-width: 80px;
+	min-height: 15px;
+}
+
+QPushButton:hover {
+	background-color: #D90429;
+}
+
+QPushButton:pressed {
+	background-color: #EF233C;
+}
+
+/*Label settings*/
+QLabel {
+	color: #F9F5E3;
+	border: 0px solid #414464;
+	border-radius: 2px;
+	padding: 2px #642669;
+	background-color: #2B2D42;
+	min-width: 80px;
+	min-height: 15px;
+}
+
+/*Line edit settings*/
+QLineEdit {
+	color: #F9F5E3;
+	border: 2px solid #414464;
+	border-radius: 2px;
+	padding: 5px ;
+	background-color: #2B2D42;
+	min-width: 80px;
+	min-height: 15px;
+}</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="Pages">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/*TAB WIDGET*/
+QTabWidget::pane {
+	border: 2px solid #414464;
+	border-bottom-radius: 3px;
+	border-top-right-radius: 3px;
+}
+QTabBar::tab {
+	color: #F9F5E3;
+	background-color: #414464;
+	border: #642669;
+	border-bottom-color: #2B2D42; /* same as the pane color */
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	min-width: 10ex;
+	padding: 2px;
+}
+QTabBar::tab:hover {
+	background-color: #D90429;
+}
+QTabBar::tab:pressed {
+	background-color: #EF233C;
+}
+
+/*SCROLL BAR*/
+QScrollBar:vertical {
+	border:none;
+	background-color: #2B2D42;
+	width:14px;
+	margin: 15px 0 15px 0;
+	boder-radius: 0px;
+}
+QScrollBar:handle:vertical {
+	background-color: #414464;
+	min-height: 30px;
+	border-radius: 7px
+}
+QScrollBar:handle:vertical:hover {
+	background-color: #D90429;
+}
+QScrollBar:handle:vertical:pressed {
+	background-color: #EF233C;
+}
+
+/*Btn top*/
+QScrollBar::sub-line:vertical {
+	border: none;
+	background-color: #414464;
+	height: 15px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	subcontrol-position: top;
+	subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical:hover {
+	background-color: #D90429;
+}
+QScrollBar::sub-line:vertical:pressed {
+	background-color: #EF233C;
+}
+
+/*Btn bottom*/
+QScrollBar::add-line:vertical {
+	border: none;
+	background-color: #414464;
+	height: 15px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	subcontrol-position: bottom;
+	subcontrol-origin: margin;
+}
+QScrollBar::add-line:vertical:hover {
+	background-color: #D90429;
+}
+QScrollBar::add-line:vertical:pressed {
+	background-color: #EF233C;
+}
+
+
+/*Reset arrow*/
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+	background:none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+	background:none;
+}
+
+/*Scroll Area settings*/
+QScrollArea{
+	border: none;
+}
+</string>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="Start">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <attribute name="title">
+        <string>Start</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0">
+        <property name="verticalSpacing">
+         <number>4</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="Name">
+          <property name="text">
+           <string>Dragon</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="startButton">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Start</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="filestoOpen">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <attribute name="title">
+        <string>Files to open</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="1">
+         <widget class="QScrollArea" name="scrollareaFiles">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_Files">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>458</width>
+             <height>500</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>500</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_4" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
+            <item row="1" column="0">
+             <widget class="QLineEdit" name="fileName1">
+              <property name="minimumSize">
+               <size>
+                <width>94</width>
+                <height>29</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Voice command(Name)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="fileNameLabel">
+              <property name="text">
+               <string>Voice command(Name)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <spacer name="verticalSpacerFiles">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="addFileButton">
+              <property name="text">
+               <string>Add File</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="filePathLabel">
+              <property name="text">
+               <string>File to open(Path)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="filePath1">
+              <property name="minimumSize">
+               <size>
+                <width>94</width>
+                <height>29</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>File to open(Path)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QPushButton" name="addManyFilesButton">
+              <property name="text">
+               <string>Add many Files</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="browsefileButton1">
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="browseFileButtonLabel">
+              <property name="text">
+               <string>Tap to browse path</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QPushButton" name="removeAllFilesButton">
+              <property name="text">
+               <string>Remove all</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QPushButton" name="removeFileButton1">
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="folderstoOpen">
+       <attribute name="title">
+        <string>Folders to open</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="scrollareaFolders">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_Folders">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>458</width>
+             <height>500</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>500</height>
+            </size>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="2" column="0">
+             <widget class="QPushButton" name="addFolderButton">
+              <property name="text">
+               <string>Add Folder</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QPushButton" name="removeFolderButton1">
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLineEdit" name="folderName1">
+              <property name="text">
+               <string>Voice command(Name)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="folderPath1">
+              <property name="text">
+               <string>Folder to open(Path)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="folderPathLabel">
+              <property name="text">
+               <string>Folder to open(Path)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="folderNameLabel">
+              <property name="text">
+               <string>Voice command(Name)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="browsefolderButton1">
+              <property name="text">
+               <string>Browse</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="browseFolderButtonLabel">
+              <property name="text">
+               <string>Tap to browse path</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <spacer name="verticalSpacerFolders">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="3">
+             <widget class="QPushButton" name="removeAllFoldersButton">
+              <property name="text">
+               <string>Remove all</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QPushButton" name="addManyFoldersButton">
+              <property name="text">
+               <string>Add many Folders</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>500</width>
+     <height>18</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
