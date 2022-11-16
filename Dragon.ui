@@ -186,7 +186,7 @@ QScrollArea{
        <attribute name="title">
         <string>Start</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0">
+       <layout class="QGridLayout" name="startLayout" rowstretch="0,0">
         <property name="verticalSpacing">
          <number>4</number>
         </property>
@@ -222,8 +222,8 @@ QScrollArea{
        <attribute name="title">
         <string>Files to open</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="1">
+       <layout class="QGridLayout" name="filesLayout">
+        <item row="0" column="0">
          <widget class="QScrollArea" name="scrollareaFiles">
           <property name="styleSheet">
            <string notr="true"/>
@@ -252,50 +252,7 @@ QScrollArea{
            <property name="autoFillBackground">
             <bool>false</bool>
            </property>
-           <layout class="QGridLayout" name="gridLayout_4" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
-            <item row="1" column="0">
-             <widget class="QLineEdit" name="fileName1">
-              <property name="minimumSize">
-               <size>
-                <width>94</width>
-                <height>29</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Voice command(Name)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="fileNameLabel">
-              <property name="text">
-               <string>Voice command(Name)</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <spacer name="verticalSpacerFiles">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="2" column="0">
-             <widget class="QPushButton" name="addFileButton">
-              <property name="text">
-               <string>Add File</string>
-              </property>
-             </widget>
-            </item>
+           <layout class="QGridLayout" name="filesAreaWidgetLayout" rowstretch="0,0,0" columnstretch="0,0,0,0">
             <item row="0" column="1">
              <widget class="QLabel" name="filePathLabel">
               <property name="text">
@@ -307,29 +264,9 @@ QScrollArea{
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="filePath1">
-              <property name="minimumSize">
-               <size>
-                <width>94</width>
-                <height>29</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>File to open(Path)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
              <widget class="QPushButton" name="addManyFilesButton">
               <property name="text">
                <string>Add many Files</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="browsefileButton1">
-              <property name="text">
-               <string>Browse</string>
               </property>
              </widget>
             </item>
@@ -350,10 +287,33 @@ QScrollArea{
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QPushButton" name="removeFileButton1">
+            <item row="0" column="0">
+             <widget class="QLabel" name="fileNameLabel">
               <property name="text">
-               <string>Remove</string>
+               <string>Voice command(Name)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <spacer name="verticalSpacerFiles">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="addFileButton">
+              <property name="text">
+               <string>Add File</string>
               </property>
              </widget>
             </item>
@@ -367,7 +327,7 @@ QScrollArea{
        <attribute name="title">
         <string>Folders to open</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_5">
+       <layout class="QGridLayout" name="foldersLayout">
         <item row="0" column="0">
          <widget class="QScrollArea" name="scrollareaFolders">
           <property name="widgetResizable">
@@ -388,32 +348,18 @@ QScrollArea{
              <height>500</height>
             </size>
            </property>
-           <layout class="QGridLayout" name="gridLayout_6">
-            <item row="2" column="0">
+           <layout class="QGridLayout" name="foldersAreaWidgetLayout">
+            <item row="1" column="0">
              <widget class="QPushButton" name="addFolderButton">
               <property name="text">
                <string>Add Folder</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QPushButton" name="removeFolderButton1">
-              <property name="text">
-               <string>Remove</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLineEdit" name="folderName1">
-              <property name="text">
-               <string>Voice command(Name)</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="folderPath1">
+             <widget class="QPushButton" name="addManyFoldersButton">
               <property name="text">
-               <string>Folder to open(Path)</string>
+               <string>Add many Folders</string>
               </property>
              </widget>
             </item>
@@ -437,24 +383,7 @@ QScrollArea{
               </property>
              </widget>
             </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="browsefolderButton1">
-              <property name="text">
-               <string>Browse</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="browseFolderButtonLabel">
-              <property name="text">
-               <string>Tap to browse path</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
+            <item row="2" column="0">
              <spacer name="verticalSpacerFolders">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -474,10 +403,13 @@ QScrollArea{
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QPushButton" name="addManyFoldersButton">
+            <item row="0" column="2">
+             <widget class="QLabel" name="browseFolderButtonLabel">
               <property name="text">
-               <string>Add many Folders</string>
+               <string>Tap to browse path</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
