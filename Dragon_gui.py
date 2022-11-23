@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
+        MainWindow.setObjectName("Dragon")
         MainWindow.setEnabled(True)
         MainWindow.resize(1000, 1000)
         MainWindow.setMinimumSize(QtCore.QSize(1000, 1000))
