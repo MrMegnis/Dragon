@@ -1,0 +1,4 @@
+PyAudio            0.2.12
+pymorphy2          0.9.1
+PyQt5              5.15.7
+SpeechRecognition  3.8.1

@@ -71,7 +71,7 @@ class DataBase:
         type_ = type_.title() + "s"
         return self.cursor.execute(f"select * from {type_}").fetchall()
 
-    def get_all_type_names(self, type_: str, func = None) -> list:
+    def get_all_type_names(self, type_: str, func=None) -> list:
         """Получение всех имён определённого типа(файл/папка)"""
         type_ = type_.lower()
         if type_ != "file" and type_ != "folder":
@@ -82,7 +82,7 @@ class DataBase:
             all_names = [func(i) for i in all_names]
         return all_names
 
-    def get_all_names(self, func = None) -> list:
+    def get_all_names(self, func=None) -> list:
         """Получение всех имён"""
         all_names = self.cursor.execute("select name from Files").fetchall() + self.cursor.execute(
             "select name from Folders").fetchall()
@@ -106,4 +106,3 @@ class DataBase:
         """Получение максимальной длины имени"""
         names = [len(i[0].split()) for i in self.get_all_names()]
         return max(names)
-

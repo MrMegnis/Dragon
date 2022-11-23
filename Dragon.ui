@@ -9,20 +9,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>500</height>
+    <width>1000</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
-    <height>500</height>
+    <width>1000</width>
+    <height>1000</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>500</width>
-    <height>500</height>
+    <width>1000</width>
+    <height>1000</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -43,7 +43,7 @@ QPushButton {
 	border: #414464;
 	border-radius: 5px;
 	background-color: #414464;
-	min-width: 80px;
+	min-width: 137px;
 	min-height: 15px;
 }
 
@@ -62,8 +62,8 @@ QLabel {
 	border-radius: 2px;
 	padding: 2px #642669;
 	background-color: #2B2D42;
-	min-width: 80px;
-	min-height: 15px;
+	min-width: 137px;
+	min-height: 19px;
 }
 
 /*Line edit settings*/
@@ -73,8 +73,8 @@ QLineEdit {
 	border-radius: 2px;
 	padding: 5px ;
 	background-color: #2B2D42;
-	min-width: 80px;
-	min-height: 15px;
+	min-width: 187px;
+	min-height: 30px;
 }</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -177,7 +177,7 @@ QScrollArea{
 </string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Start">
        <property name="styleSheet">
@@ -236,8 +236,8 @@ QScrollArea{
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>458</width>
-             <height>500</height>
+             <width>972</width>
+             <height>922</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -263,13 +263,6 @@ QScrollArea{
               </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="addManyFilesButton">
-              <property name="text">
-               <string>Add many Files</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="2">
              <widget class="QLabel" name="browseFileButtonLabel">
               <property name="text">
@@ -280,20 +273,10 @@ QScrollArea{
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
-             <widget class="QPushButton" name="removeAllFilesButton">
+            <item row="1" column="1">
+             <widget class="QPushButton" name="addManyFilesButton">
               <property name="text">
-               <string>Remove all</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="fileNameLabel">
-              <property name="text">
-               <string>Voice command(Name)</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
+               <string>Add many Files</string>
               </property>
              </widget>
             </item>
@@ -314,6 +297,23 @@ QScrollArea{
              <widget class="QPushButton" name="addFileButton">
               <property name="text">
                <string>Add File</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="fileNameLabel">
+              <property name="text">
+               <string>Voice command(Name)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="removeFileButtonLabel">
+              <property name="text">
+               <string>Tap to remove row</string>
               </property>
              </widget>
             </item>
@@ -338,8 +338,8 @@ QScrollArea{
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>458</width>
-             <height>500</height>
+             <width>972</width>
+             <height>922</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -363,26 +363,6 @@ QScrollArea{
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="folderPathLabel">
-              <property name="text">
-               <string>Folder to open(Path)</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="folderNameLabel">
-              <property name="text">
-               <string>Voice command(Name)</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="0">
              <spacer name="verticalSpacerFolders">
               <property name="orientation">
@@ -396,10 +376,30 @@ QScrollArea{
               </property>
              </spacer>
             </item>
-            <item row="0" column="3">
-             <widget class="QPushButton" name="removeAllFoldersButton">
+            <item row="0" column="0">
+             <widget class="QLabel" name="folderNameLabel">
               <property name="text">
-               <string>Remove all</string>
+               <string>Voice command(Name)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="folderPathLabel">
+              <property name="text">
+               <string>Folder to open(Path)</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="removeFolderButtonLabel">
+              <property name="text">
+               <string>Tap tp remove row</string>
               </property>
              </widget>
             </item>
@@ -428,7 +428,7 @@ QScrollArea{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>500</width>
+     <width>1000</width>
      <height>18</height>
     </rect>
    </property>

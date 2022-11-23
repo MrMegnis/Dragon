@@ -6,6 +6,7 @@ import pymorphy2
 import csv
 
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from Dragon_gui import Ui_MainWindow
 from database import UnknownType, DataBase
@@ -16,6 +17,8 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.db = DataBase()
         self.setupUi(self)
+        self.pixmap = QPixmap('icon.png')
+        self.Name.setPixmap(self.pixmap)
 
         self.recognizeTimer = QtCore.QTimer(self)
         self.recognizeTimer.setInterval(200)  # .5 seconds
@@ -28,8 +31,8 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
         self.startButton.clicked.connect(self.start)
         self.addFileButton.clicked.connect(self.add)
         self.addFolderButton.clicked.connect(self.add)
-        # self.addManyFilesButton.clicked.connect(self.add_many)
-        # self.addManyFoldersButton.clicked.connect(self.add_many)
+        self.addManyFilesButton.clicked.connect(self.add_many)
+        self.addManyFoldersButton.clicked.connect(self.add_many)
 
         self.setup_commands_settings()
 
@@ -44,7 +47,7 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
     def open_(self, path) -> None:
         os.startfile(path)
 
-    def normalize(self, name : str) -> str:
+    def normalize(self, name: str) -> str:
         """Преобразование слов в строке в начальную форму"""
         normalized_name = []
         for i in name.split():
@@ -69,24 +72,28 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
                     # Ставим все слова в начальную форму
                     name_normalized = self.normalize(name)
                     print(name, name_normalized)
-                    file_names = self.db.get_all_type_names("file", lambda x : x[0].lower())
-                    folder_names = self.db.get_all_type_names("folder", lambda x : x[0].lower())
+                    file_names = self.db.get_all_type_names("file", lambda x: x[0].lower())
+                    folder_names = self.db.get_all_type_names("folder", lambda x: x[0].lower())
                     # Смотрю есть ли имя длинны i, если есть, то открываю
                     for i in range(min(max_, len(name.split())), 0, -1):
-                        name_i = name.split()[0: i + 1]
-                        name_normalized_i = name_normalized.split()[0: i + 1]
-                        print(name_i, name_normalized_i)
-                        if " ".join(name_i).lower() in file_names:
-                            self.open_(self.db.get_path(name.lower(), "file"))
+                        name_i = " ".join(name.split()[0: i + 1]).lower()
+                        name_normalized_i = " ".join(name_normalized.split()[0: i + 1]).lower()
+                        # print(name_i, name_normalized_i, " ".join(name_i).lower(), " ".join(name_normalized_i).lower())
+                        if name_i in file_names:
+                            print("1")
+                            self.open_(self.db.get_path(name_i, "file"))
                             break
-                        elif " ".join(name_normalized_i).lower() in file_names:
-                            self.open_(self.db.get_path(name_normalized.lower(), "file"))
+                        elif name_normalized_i in file_names:
+                            print("2")
+                            self.open_(self.db.get_path(name_normalized_i, "file"))
                             break
-                        elif " ".join(name_i).lower() in folder_names:
-                            self.open_(self.db.get_path(name.lower(), "folder"))
+                        elif name_i in folder_names:
+                            print("3")
+                            self.open_(self.db.get_path(name_i, "folder"))
                             break
-                        elif " ".join(name_normalized_i).lower() in folder_names:
-                            self.open_(self.db.get_path(name_normalized.lower(), "folder"))
+                        elif name_normalized_i in folder_names:
+                            print("4")
+                            self.open_(self.db.get_path(name_normalized_i, "folder"))
                             break
 
         except Exception as e:
@@ -193,11 +200,23 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
             layout = add_button.parentWidget().layout()
             index = layout.indexOf(add_button)
             pos = layout.getItemPosition(index)[:2]
+            type_ = layout.parentWidget().objectName().split("_")[1][0:-1]
             path = QFileDialog.getOpenFileName(self.centralwidget, 'Выберете файл', '')[0]
             with open(path, encoding="utf8") as file:
                 reader = csv.reader(file, delimiter=';', quotechar='"')
+                widget_data = []
+                for index, row in enumerate(reader):
+                    if type_.lower() == "file" and "." in row[1]:
+                        widget_data.append(["0"] + row[0:2])
+                        self.db.add(row[0], row[1], type_)
+                    elif type_.lower() == "folder" and "." not in row[1]:
+                        widget_data.append(["0"] + row[0:2])
+                        self.db.add(row[0], row[1], type_)
+                self.add_widgets(layout, widget_data, pos[1] - 1, pos[0])
+
         except Exception as e:
             print(e)
+
     def add(self) -> None:
         """Логика для кнопки Add File/Folder"""
         try:
@@ -215,14 +234,12 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
                 raise UnknownType
             if path == "":
                 return
-            all_names = self.db.get_all_type_names(type_, lambda x : x[0].lower())
+            all_names = self.db.get_all_type_names(type_, lambda x: x[0].lower())
             name = path.split("/")[-1].split(".")[0]
             similar_names = self.db.get_similar_names(name, type_)
-            print(similar_names)
             if len(similar_names) > 0:
                 similar_names = sorted(
                     [i[0].split(name.lower())[-1] for i in similar_names if i[0].split(name.lower())[-1].isdigit()])
-                print(similar_names, "aboba")
                 if len(similar_names) == 0:
                     name += "1"
                 elif similar_names[-1].isdigit():
@@ -231,16 +248,7 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
                 return
 
             # Добавление строки виджетов
-            # add_many_button = layout.itemAtPosition(pos[0], pos[1] + 1).widget()
-            # spacer_item = layout.itemAtPosition(pos[0] + 1, pos[1])
-            # layout.removeItem(spacer_item)
-            # layout.removeWidget(add_many_button)
-            # layout.removeWidget(add_button)
-            # self.add_widgets_row(layout, name, path, pos[1], pos[0])
-            # layout.addWidget(add_button, pos[0] + 1, pos[1])
-            # layout.addWidget(add_many_button, pos[0] + 1, pos[1] + 1)
-            # layout.addItem(spacer_item, pos[0] + 2, pos[1])
-            self.add_widgets(layout,[[0, name, path]], pos[1], pos[0])
+            self.add_widgets(layout, [[0, name, path]], pos[1], pos[0])
             # Добавление записи в бд
             self.db.add(name, path, type_)
         except Exception as e:
@@ -258,14 +266,11 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
             name = layout.itemAtPosition(pos[0], pos[1] - 3).widget().text()
             self.db.delete(name, type_)
             # Удаление виджетов в одной линии с remove конпкой
-            print("pivo")
             for i in range(4):
                 widget = layout.itemAtPosition(pos[0], pos[1] - i).widget()
                 layout.removeWidget(widget)
-            print("pivo1")
             # Сдвиг виджетов
             while type(layout.itemAtPosition(pos[0] + 2, pos[1] - 3)) is not QtWidgets.QSpacerItem:
-                print("aboba111")
                 name_edit = layout.itemAtPosition(pos[0] + 1, pos[1] - 3).widget()
                 path_edit = layout.itemAtPosition(pos[0] + 1, pos[1] - 2).widget()
                 browse_button = layout.itemAtPosition(pos[0] + 1, pos[1] - 1).widget()
@@ -275,7 +280,6 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
                     layout.removeWidget(widget)
                     layout.addWidget(widget, pos[0], pos[1] - 3 + index)
                 pos[0] += 1
-                print("aboba222")
             # Сдвиг addButton, addManyButton и spacerItem
             add_button = layout.itemAtPosition(pos[0] + 1, pos[1] - 3).widget()
             add_many_button = layout.itemAtPosition(pos[0] + 1, pos[1] - 2).widget()
@@ -318,7 +322,7 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
 
 
 if __name__ == '__main__':
-        app = QApplication(sys.argv)
-        ex = DragonMainWindow()
-        ex.show()
-        sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    ex = DragonMainWindow()
+    ex.show()
+    sys.exit(app.exec_())
