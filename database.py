@@ -32,7 +32,6 @@ class DataBase:
         if type_ != "file" and type_ != "folder":
             raise UnknownType
         type_ = type_.title()
-        print(self.cursor.execute(f'select path from {type_}s where name == ?', (name.lower(),)).fetchone())
 
         return self.cursor.execute(f'select path from {type_}s where name == ?', (name.lower(),)).fetchone()[0]
 
@@ -46,6 +45,7 @@ class DataBase:
         self.connection.commit()
 
     def update_name(self, new_name: str, path: str, type_: str) -> None:
+        """Обновление записи с путём path"""
         type_ = type_.lower()
         if type_ != "file" and type_ != "folder":
             raise UnknownType
@@ -55,6 +55,7 @@ class DataBase:
         self.connection.commit()
 
     def delete(self, name: str, type_: str) -> None:
+        """Удаление записи с именем name"""
         type_ = type_.lower()
         if type_ != "file" and type_ != "folder":
             raise UnknownType
@@ -63,47 +64,46 @@ class DataBase:
         self.connection.commit()
 
     def get_all(self, type_: str) -> list:
+        """Получение всех id, name, path определённого типа"""
         type_ = type_.lower()
         if type_ != "file" and type_ != "folder":
             raise UnknownType
         type_ = type_.title() + "s"
         return self.cursor.execute(f"select * from {type_}").fetchall()
 
-    def get_all_type_names(self, type_: str) -> list:
+    def get_all_type_names(self, type_: str, func = None) -> list:
+        """Получение всех имён определённого типа(файл/папка)"""
         type_ = type_.lower()
         if type_ != "file" and type_ != "folder":
             raise UnknownType
         type_ = type_.title() + "s"
-        return self.cursor.execute(f"select name from {type_}").fetchall()
+        all_names = self.cursor.execute(f"select name from {type_}").fetchall()
+        if func is not None:
+            all_names = [func(i) for i in all_names]
+        return all_names
 
-    def get_all_names(self) -> list:
-        return self.cursor.execute("select name from Files").fetchall() + self.cursor.execute(
+    def get_all_names(self, func = None) -> list:
+        """Получение всех имён"""
+        all_names = self.cursor.execute("select name from Files").fetchall() + self.cursor.execute(
             "select name from Folders").fetchall()
+        if func is not None:
+            all_names = [func(i) for i in all_names]
+        return all_names
 
     def get_similar_names(self, name: str, type_: str) -> list:
+        """Получение всех имен, начинающихся на name"""
         type_ = type_.lower()
         if type_ != "file" and type_ != "folder":
             raise UnknownType
         names = self.get_all_type_names(type_)
         similar_names = []
         for i in names:
-            print(i)
-            if name in i[0]:
+            if name.lower() in i[0]:
                 similar_names.append(i)
         return similar_names
 
-    # def add_max(self, max: int) -> None:
-    #     self.cursor.execute('insert into Max value(?)', (max,))
-
     def get_max(self) -> int:
+        """Получение максимальной длины имени"""
         names = [len(i[0].split()) for i in self.get_all_names()]
         return max(names)
-        # return int(self.cursor.execute('select max from Max').fetchone()[0])
 
-    # def update_max(self, max: int) -> None:
-    #     self.cursor.execute('update Max set max == ?', (max,))
-    #     self.connection.commit()
-
-    # def delete_max(self, max: int) -> None:
-    #     self.cursor.execute('delete from Max')
-    #     self.connection.commit()
