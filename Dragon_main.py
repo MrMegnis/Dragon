@@ -183,15 +183,20 @@ class DragonMainWindow(QMainWindow, Ui_MainWindow):
 
     def changed(self) -> None:
         """Смена имени/пути"""
-        name_widget = self.centralwidget.sender()
-        layout = name_widget.parentWidget().layout()
-        index = layout.indexOf(name_widget)
-        type_ = layout.parentWidget().objectName().split("_")[1][0:-1]
-        pos = layout.getItemPosition(index)[:2]
-        name = name_widget.text()
-        path_widget = layout.itemAtPosition(pos[0], pos[1] + 1).widget()
-        path = path_widget.text()
-        self.db.update_name(name, path, type_)
+        try:
+            name_widget = self.centralwidget.sender()
+            layout = name_widget.parentWidget().layout()
+            index = layout.indexOf(name_widget)
+            type_ = layout.parentWidget().objectName().split("_")[1][0:-1]
+            pos = layout.getItemPosition(index)[:2]
+            name = name_widget.text()
+            path_widget = layout.itemAtPosition(pos[0], pos[1] + 1).widget()
+            path = path_widget.text()
+            if name in self.db.get_all_type_names(type_, lambda x: x[0].lower()):
+                return
+            self.db.update_name(name, path, type_)
+        except Exception as e:
+            print(e)
 
     def add_many(self) -> None:
         """Логика для кнопки Add many File/Folder"""
